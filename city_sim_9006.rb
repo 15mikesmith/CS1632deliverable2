@@ -1,5 +1,8 @@
 require_relative './location_node'
 
+#srand(333) # Replace this with arg
+srand(8) # Replace this with arg
+
 r = rand
 puts "Random number #{(r*100).to_i}"
 
@@ -22,12 +25,47 @@ def checkIfAtEnd(loc)
 end
 
 
+def incrementBook(loc)
+  if(loc.name == "Hillman")
+    return true
+  end
+end
+
+def incrementToy(loc)
+  if(loc.name == "Museum")
+    return true
+  end
+end
+
+def startingPos(randomValue)
+
+  if(((randomValue*100).to_i) <= 24)
+    return "Hillman"
+  elsif(((randomValue*100).to_i) >= 25 && ((randomValue*100).to_i) <= 49)
+    return "Hospital"
+  elsif(((randomValue*100).to_i) >= 50 && ((randomValue*100).to_i) <= 74)
+    return "Cathedral"
+  else
+    return "Museum"
+
+  end
+
+end
+
+#Create arrays to hold values for books and toys
+
+totalBooks = [0,0,0,0,0]
+totalToys = [0,0,0,0,0]
+
+
 #Create nodes for each location in the city
 
 #Exit nodes
 downTown = LocationNode.new("DownTown",nil,nil)
 
 monroeville = LocationNode.new("Monroeville",nil,nil)
+
+
 
 #4 buildings
 
@@ -38,6 +76,9 @@ hospital = LocationNode.new("Hospital",nil,nil)
 cathedral = LocationNode.new("Cathedral",nil,nil)
 
 museum = LocationNode.new("Museum",nil,nil)
+
+
+
 
 #Link buildings to each other
 
@@ -53,34 +94,97 @@ cathedral.node2 = museum
 museum.node1 =  hillMan
 museum.node2 = cathedral
 
+
 #Traverse city starting at hillman
 
-driver = hillMan
+#select starting location at random
 
-puts "Driver 1 is at "+ driver.name
 
-i = 0
+
+puts "STARTING POSITION IS: "+ startingPos(r)
+
+
+case startingPos(r)
+  when "Hillman"
+    driver = hillMan
+
+  when "Hospital"
+    driver = hospital
+
+  when "Cathedral"
+    driver = cathedral
+
+  when "Museum"
+    driver = museum
+end
+
+
+driverNum = 0
+
+while driverNum < 1
+
+
+puts "Driver " + (driverNum+1).to_s +  " is starting at "+ driver.name + "\n\n"
+
+#i = 0
 while true
 
-  #depending on whether rand is odd or even, decide what route to take
-
-  if((rand*100).to_i%2 ==0)
-    puts "Even, choosing node 1"
-    driver = driver.node1
-  else
-    puts "Odd, choosing node 2"
-    driver = driver.node2
-  end
-
-
-
-  puts "Driver 1 is at " + driver.name
-
+  #If driver is at monroeville or downtown, then end simulation
   if(checkIfAtEnd(driver))
     break
   end
-  i+=1
+
+  #Increment Book and Toy count for specific driver
+  if(incrementBook(driver))
+    totalBooks[driverNum]+=1
+  end
+
+  if(incrementToy(driver))
+    totalToys[driverNum]+=1
+  end
+
+  #depending on whether rand is odd or even, decide what route to take
+
+  print "Driver " + (driverNum+1).to_s +  " heading from "+ driver.name
+
+  if((rand*100).to_i%2 ==0)
+      #puts "Even, choosing node 1"
+      driver = driver.node1
+    else
+      #puts "Odd, choosing node 2"
+      driver = driver.node2
+    end
+
+
+    #puts "Driver " + (driverNum+1).to_s +  " is at " + driver.name
+    puts " to " + driver.name
+
+
+
+    #i+=1
+  end
+
+
+#Output stats for simulation
+
+  if(totalBooks[driverNum] == 1)
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalBooks[driverNum].to_s +  " book!"
+  else
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalBooks[driverNum].to_s +  " books!"
+  end
+
+  if(totalToys[driverNum] == 1)
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalToys[driverNum].to_s +  " toy!"
+  else
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalToys[driverNum].to_s +  " toys!"
+  end
+
+
+
+  driverNum+=1
 end
+
+
 
 
 
