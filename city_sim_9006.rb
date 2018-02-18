@@ -1,10 +1,9 @@
 require_relative './location_node'
 
 #srand(333) # Replace this with arg
-srand(8) # Replace this with arg
+srand(0) # Replace this with arg
 
-r = rand
-puts "Random number #{(r*100).to_i}"
+
 
 
 
@@ -31,11 +30,20 @@ def incrementBook(loc)
   end
 end
 
+
 def incrementToy(loc)
   if(loc.name == "Museum")
     return true
   end
 end
+
+
+def incrementClass(loc)
+  if(loc.name == "Cathedral")
+    return true
+  end
+end
+
 
 def startingPos(randomValue)
 
@@ -56,26 +64,27 @@ end
 
 totalBooks = [0,0,0,0,0]
 totalToys = [0,0,0,0,0]
+totalClasses = [1,1,1,1,1]
 
 
 #Create nodes for each location in the city
 
 #Exit nodes
-downTown = LocationNode.new("DownTown",nil,nil)
+downTown = LocationNode.new("DownTown",nil,nil,nil,nil)
 
-monroeville = LocationNode.new("Monroeville",nil,nil)
+monroeville = LocationNode.new("Monroeville",nil,nil,nil,nil)
 
 
 
 #4 buildings
 
-hillMan = LocationNode.new("Hillman",nil,nil)
+hillMan = LocationNode.new("Hillman",nil,nil,nil,nil)
 
-hospital = LocationNode.new("Hospital",nil,nil)
+hospital = LocationNode.new("Hospital",nil,nil,nil,nil)
 
-cathedral = LocationNode.new("Cathedral",nil,nil)
+cathedral = LocationNode.new("Cathedral",nil,nil,nil,nil)
 
-museum = LocationNode.new("Museum",nil,nil)
+museum = LocationNode.new("Museum",nil,nil,nil,nil)
 
 
 
@@ -84,44 +93,57 @@ museum = LocationNode.new("Museum",nil,nil)
 
 hillMan.node1 =  hospital
 hillMan.node2 = downTown
+hillMan.street1 = "Foo St."
+hillMan.street2 = "Fifth Ave."
 
 hospital.node1 =  cathedral
 hospital.node2 = hillMan
+hospital.street1 = "Fourth Ave."
+hospital.street2 = "Foo St."
 
 cathedral.node1 =  monroeville
 cathedral.node2 = museum
+cathedral.street1 = "Fourth Ave."
+cathedral.street2 = "Bar St."
 
 museum.node1 =  hillMan
 museum.node2 = cathedral
+museum.street1 = "Fifth Ave."
+museum.street2 = "Bar St."
 
 
 #Traverse city starting at hillman
 
-#select starting location at random
 
-
-
-puts "STARTING POSITION IS: "+ startingPos(r)
-
-
-case startingPos(r)
-  when "Hillman"
-    driver = hillMan
-
-  when "Hospital"
-    driver = hospital
-
-  when "Cathedral"
-    driver = cathedral
-
-  when "Museum"
-    driver = museum
-end
 
 
 driverNum = 0
 
-while driverNum < 1
+while driverNum < 5
+
+  #select starting location for driver at random
+
+  r = rand
+  puts "\nRandom number #{(r*100).to_i}"
+
+  puts "STARTING POSITION IS: "+ startingPos(r)
+
+
+  case startingPos(r)
+    when "Hillman"
+      driver = hillMan
+
+    when "Hospital"
+      driver = hospital
+
+    when "Cathedral"
+      driver = cathedral
+
+    when "Museum"
+      driver = museum
+  end
+
+
 
 
 puts "Driver " + (driverNum+1).to_s +  " is starting at "+ driver.name + "\n\n"
@@ -143,21 +165,30 @@ while true
     totalToys[driverNum]+=1
   end
 
+  if(incrementClass(driver))
+    totalClasses[driverNum] *= 2
+  end
+
   #depending on whether rand is odd or even, decide what route to take
 
   print "Driver " + (driverNum+1).to_s +  " heading from "+ driver.name
 
+  s1 = driver.street1
+  s2 = driver.street2
+
   if((rand*100).to_i%2 ==0)
       #puts "Even, choosing node 1"
       driver = driver.node1
-    else
+      puts " to " + driver.name + " via " + s1
+  else
       #puts "Odd, choosing node 2"
       driver = driver.node2
-    end
+      puts " to " + driver.name + " via " + s2
+  end
 
 
     #puts "Driver " + (driverNum+1).to_s +  " is at " + driver.name
-    puts " to " + driver.name
+
 
 
 
@@ -179,7 +210,11 @@ while true
     puts "Driver "+(driverNum+1).to_s + " obtained " + totalToys[driverNum].to_s +  " toys!"
   end
 
-
+  if(totalClasses[driverNum] == 1)
+    puts "Driver "+(driverNum+1).to_s + " attended " + totalClasses[driverNum].to_s +  " class!"
+  else
+    puts "Driver "+(driverNum+1).to_s + " attended " + totalClasses[driverNum].to_s +  " classes!"
+  end
 
   driverNum+=1
 end
