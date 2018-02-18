@@ -27,6 +27,8 @@ end
 def incrementBook(loc)
   if(loc.name == "Hillman")
     return true
+  else
+    return false
   end
 end
 
@@ -34,6 +36,8 @@ end
 def incrementToy(loc)
   if(loc.name == "Museum")
     return true
+  else
+    return false
   end
 end
 
@@ -41,6 +45,8 @@ end
 def incrementClass(loc)
   if(loc.name == "Cathedral")
     return true
+  else
+    return false
   end
 end
 
