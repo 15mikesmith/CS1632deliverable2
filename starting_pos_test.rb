@@ -1,0 +1,2 @@
+class StartingPos_test
+end
