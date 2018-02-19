@@ -1,7 +1,5 @@
 require_relative './location_node'
 
-#srand(333) # Replace this with arg
-
 #Retrieve arg to seed
 input = ARGV
 
@@ -59,11 +57,9 @@ end
 def checkIfAtEnd(loc)
 
   if(loc.name == "Monroeville")
-    puts "Driver exiting at Monroeville"
     return true
 
   elsif(loc.name == "DownTown")
-    puts "Driver exiting at DownTown"
     return true
 
   else
@@ -183,7 +179,7 @@ while driverNum < 5
   #select starting location for driver at random
 
   r = rand
-  puts "\nRandom number #{(r*100).to_i}"
+  #puts "\nRandom number #{(r*100).to_i}"
 
 
 
@@ -203,8 +199,8 @@ while driverNum < 5
 
 
 
-
-puts "Driver " + (driverNum+1).to_s +  " is starting at "+ driver.name + "\n\n"
+#Notifies where the user is starting from
+#puts "Driver " + (driverNum+1).to_s +  " is starting at "+ driver.name + "\n"
 
 #i = 0
 while true
