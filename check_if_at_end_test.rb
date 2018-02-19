@@ -4,6 +4,13 @@
 class CheckIfAtEnd_test < Minitest::Test
 
 # UNIT TESTS FOR METHOD checkIfAtEnd(loc)
+#   # Equivalence classes:
+# x= Monroeville -> returns true
+# x= DownTown -> returns true
+# x= Hospital -> returns false
+# x= Hillman -> returns false
+# x= Cathedral -> returns false
+# x= Museum -> returns false
 
 
   #If driver's lcoation is Monroeville, then return true

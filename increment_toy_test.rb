@@ -4,7 +4,14 @@ require_relative './city_sim_9006'
 class IncrementToy_test < Minitest::Test
 
 # UNIT TESTS FOR METHOD incrementToy(loc)
-
+#   # Equivalence classes:
+# x= Hillman -> returns false
+# x= Monroeville -> returns false
+# x= DownTown -> returns false
+# x= Hospital -> returns false
+# x= Cathedral -> returns false
+# x= Museum -> returns true
+#
 #Test if incrmeentBook only incrmements count of toys at the correct location
 #If the locationNode's name is Museum, then return true
   def test_for_museum
