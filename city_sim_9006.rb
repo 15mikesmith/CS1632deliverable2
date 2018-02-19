@@ -1,7 +1,25 @@
 require_relative './location_node'
 
 #srand(333) # Replace this with arg
-srand(0) # Replace this with arg
+
+#Retrieve arg to seed
+input = ARGV
+
+
+if(!(input.length == 1))
+  puts "Please enter 1 argument"
+  exit(1)
+end
+
+input = input[0].to_i
+
+if(!(input.is_a?(Numeric)))
+  input = 0
+end
+
+
+
+srand(input) # Replace this with arg
 
 
 def printBooks(totalBooks,driverNum)
@@ -167,7 +185,6 @@ while driverNum < 5
   r = rand
   puts "\nRandom number #{(r*100).to_i}"
 
-  puts "STARTING POSITION IS: "+ startingPos(r)
 
 
   case startingPos(r)
