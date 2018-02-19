@@ -5,13 +5,15 @@
 
 # UNIT TESTS FOR METHOD incrementClass(loc)
 
+#Test if incrmeentBook only incrmements count of Classes at the correct location
 #If the locationNode's name is cathedral, then return true
     def test_for_cathedral
       testLocation = LocationNode.new("Cathedral",nil,nil,nil,nil)
       assert_equal true, incrementClass(testLocation)
     end
 
-#If the locationNode's name is not cathedral, then return false
+    #Test if incrmeentBook only incrmements count of Classes at the correct location
+    #If the locationNode's name is not cathedral, then return false
     def test_for_not_cathedral
       testLocation = LocationNode.new("Hillman",nil,nil,nil,nil)
       assert_equal false, incrementClass(testLocation)

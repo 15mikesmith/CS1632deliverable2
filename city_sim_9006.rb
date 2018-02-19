@@ -199,10 +199,6 @@ while driverNum < 5
 
 
 
-#Notifies where the user is starting from
-#puts "Driver " + (driverNum+1).to_s +  " is starting at "+ driver.name + "\n"
-
-#i = 0
 while true
 
   #If driver is at monroeville or downtown, then end simulation
