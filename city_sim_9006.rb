@@ -4,7 +4,38 @@ require_relative './location_node'
 srand(0) # Replace this with arg
 
 
+def printBooks(totalBooks,driverNum)
+  if(totalBooks[driverNum] == 1)
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalBooks[driverNum].to_s +  " book!"
+  elsif(totalBooks[driverNum] < 0)
+    puts "Invalid number of Books"
+  else
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalBooks[driverNum].to_s +  " books!"
+  end
+end
 
+
+def printToys(totalToys,driverNum)
+  if(totalToys[driverNum] == 1)
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalToys[driverNum].to_s +  " toy!"
+  elsif(totalToys[driverNum] < 0)
+    puts "Invalid number of Toys"
+  else
+    puts "Driver "+(driverNum+1).to_s + " obtained " + totalToys[driverNum].to_s +  " toys!"
+  end
+end
+
+
+
+def printClasses(totalClasses,driverNum)
+  if(totalClasses[driverNum] == 1)
+    puts "Driver "+(driverNum+1).to_s + " attended " + totalClasses[driverNum].to_s +  " class!"
+  elsif(totalClasses[driverNum] < 0)
+    puts "Invalid number of Classes"
+  else
+    puts "Driver "+(driverNum+1).to_s + " attended " + totalClasses[driverNum].to_s +  " classes!"
+  end
+end
 
 
 def checkIfAtEnd(loc)
@@ -52,6 +83,10 @@ end
 
 
 def startingPos(randomValue)
+  if(!(randomValue).is_a?(Numeric))
+    puts "Must enter a numerical value"
+    return false
+  end
 
   if(((randomValue*100).to_i) <= 24)
     return "Hillman"
@@ -183,44 +218,21 @@ while true
   s2 = driver.street2
 
   if((rand*100).to_i%2 ==0)
-      #puts "Even, choosing node 1"
       driver = driver.node1
       puts " to " + driver.name + " via " + s1
   else
-      #puts "Odd, choosing node 2"
       driver = driver.node2
       puts " to " + driver.name + " via " + s2
   end
 
-
-    #puts "Driver " + (driverNum+1).to_s +  " is at " + driver.name
-
-
-
-
-    #i+=1
   end
 
 
 #Output stats for simulation
 
-  if(totalBooks[driverNum] == 1)
-    puts "Driver "+(driverNum+1).to_s + " obtained " + totalBooks[driverNum].to_s +  " book!"
-  else
-    puts "Driver "+(driverNum+1).to_s + " obtained " + totalBooks[driverNum].to_s +  " books!"
-  end
-
-  if(totalToys[driverNum] == 1)
-    puts "Driver "+(driverNum+1).to_s + " obtained " + totalToys[driverNum].to_s +  " toy!"
-  else
-    puts "Driver "+(driverNum+1).to_s + " obtained " + totalToys[driverNum].to_s +  " toys!"
-  end
-
-  if(totalClasses[driverNum] == 1)
-    puts "Driver "+(driverNum+1).to_s + " attended " + totalClasses[driverNum].to_s +  " class!"
-  else
-    puts "Driver "+(driverNum+1).to_s + " attended " + totalClasses[driverNum].to_s +  " classes!"
-  end
+  printBooks(totalBooks,driverNum)
+  printToys(totalToys,driverNum)
+  printClasses(totalClasses,driverNum)
 
   driverNum+=1
 end

@@ -7,7 +7,6 @@ class CheckIfAtEnd_test < Minitest::Test
 
   def test_if_at_Monroeville
     testLocation = LocationNode.new("Monroeville",nil,nil,nil,nil)
-
     assert_equal true, checkIfAtEnd(testLocation)
   end
 
